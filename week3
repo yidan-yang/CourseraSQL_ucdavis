@@ -1,0 +1,32 @@
+/* How many albums does the artist Led Zeppelin have? */
+select count(AlbumId) as AlbNums
+from albums
+where ArtistId = (select ArtistId from artists where Name = 'Led Zeppelin')
+
+
+
+/* Create a list of album titles and the unit prices for the artist "Audioslave".*/
+select artists.Name, Title, UnitPrice
+from ((albums inner join artists on albums.ArtistId = artists.ArtistId)
+inner join tracks on albums.AlbumId = tracks.albumId)
+where artists.name = 'Audioslave'
+
+
+
+/* Find the first and last name of any customer who
+does not have an invoice. Are there any customers returned from the query? */
+select cus.FirstName, cus.LastName, inv.InvoiceId
+from customers cus inner join invoices inv on cus.CustomerId = inv.CustomerId
+where Inv.invoiceId is NULL
+
+
+/* Find the total price for each album. */
+select alb.Title, sum(t.UnitPrice)
+from albums alb inner join tracks t on alb.AlbumID = t.AlbumID
+where alb.Title = 'Big Ones'
+
+
+
+/* How many records are created when you apply a Cartesian join to the invoice and invoice items table?*/
+select count(*) as totalrecords
+from invoices cross join invoice_items
