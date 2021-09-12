@@ -5,6 +5,22 @@
 select Name from Tracks where AlbumId is (
 select AlbumId from Albums where Title = 'Californication')
 
++-------------------+
+| Name              |
++-------------------+
+| Around The World  |
+| Parallel Universe |
+| Scar Tissue       |
+| Otherside         |
+| Get On Top        |
+| Californication   |
+| Easily            |
+| Porcelain         |
+| Emit Remmus       |
+| I Like Dirt       |
++-------------------+
+(Output limit exceeded, 10 of 15 total rows shown)
+
 
 /* #2 Find the total number of invoices for each customer along with the customer's full name, city and email. */
 select c.FirstName, c.LastName, c.City, c.Email, count(i.CustomerId) as numinv
@@ -12,6 +28,23 @@ from Customers c inner join Invoices i on c.CustomerId = i.CustomerId
 group by c.CustomerId
 
 -- Note: This one has to use group by in the end, otherwise it only shows one client's name.
+
++-----------+-------------+---------------------+--------------------------+--------+
+| FirstName | LastName    | City                | Email                    | numinv |
++-----------+-------------+---------------------+--------------------------+--------+
+| Luís      | Gonçalves   | São José dos Campos | luisg@embraer.com.br     |      7 |
+| Leonie    | Köhler      | Stuttgart           | leonekohler@surfeu.de    |      7 |
+| François  | Tremblay    | Montréal            | ftremblay@gmail.com      |      7 |
+| Bjørn     | Hansen      | Oslo                | bjorn.hansen@yahoo.no    |      7 |
+| František | Wichterlová | Prague              | frantisekw@jetbrains.com |      7 |
+| Helena    | Holý        | Prague              | hholy@gmail.com          |      7 |
+| Astrid    | Gruber      | Vienne              | astrid.gruber@apple.at   |      7 |
+| Daan      | Peeters     | Brussels            | daan_peeters@apple.be    |      7 |
+| Kara      | Nielsen     | Copenhagen          | kara.nielsen@jubii.dk    |      7 |
+| Eduardo   | Martins     | São Paulo           | eduardo@woodstock.com.br |      7 |
++-----------+-------------+---------------------+--------------------------+--------+
+(Output limit exceeded, 10 of 59 total rows shown)
+
 
 
 /* #3 What is the song title of trackID 12 from the "For Those About to Rock We Salute You" album? Enter the answer below.*/ 
@@ -21,7 +54,11 @@ group by c.CustomerId
 select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
 from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
 where a.Title like 'For%' and t.TrackId = 12
-
++--------------------+---------+----------+---------+---------------------------------------+
+| TrackName          | AlbumId | ArtistId | TrackId | Title                                 |
++--------------------+---------+----------+---------+---------------------------------------+
+| Breaking The Rules |       1 |        1 |      12 | For Those About To Rock We Salute You |
++--------------------+---------+----------+---------+---------------------------------------+
 
 -- Final soln
 select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
@@ -34,6 +71,7 @@ where a.Title = 'For Those About To Rock We Salute You' and t.TrackId = 12
 select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
 from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
 where a.AlbumId = 1
+
 
 
 /* #4 Retrieve a list with the managers last name, and the last name of the employees who report to him or her.*/
@@ -57,19 +95,30 @@ from Employees
 -- There are 3 managers: General Manager, IT Manager and Sales Manager
 
 -- Use wildcards to retrieve Managers' name
-select FirstName, LastName, Title, ReportsTo
+select FirstName, LastName, Title, ReportsTo, EmployeeId
 from Employees
 where Title like '%Manager'
 
-+-----------+----------+-----------------+-----------+
-| FirstName | LastName | Title           | ReportsTo |
-+-----------+----------+-----------------+-----------+
-| Andrew    | Adams    | General Manager |      None |
-| Nancy     | Edwards  | Sales Manager   |         1 |
-| Michael   | Mitchell | IT Manager      |         1 |
-+-----------+----------+-----------------+-----------+
++-----------+----------+-----------------+-----------+------------+
+| FirstName | LastName | Title           | ReportsTo | EmployeeId |
++-----------+----------+-----------------+-----------+------------+
+| Andrew    | Adams    | General Manager |      None |          1 |
+| Nancy     | Edwards  | Sales Manager   |         1 |          2 |
+| Michael   | Mitchell | IT Manager      |         1 |          6 |
++-----------+----------+-----------------+-----------+------------+
+
+-- start another query
+select FirstName, LastName, Title, ReportsTo
+from Employees
+where ReportsTo = 6
 
 
++-----------+----------+----------+-----------+
+| FirstName | LastName | Title    | ReportsTo |
++-----------+----------+----------+-----------+
+| Robert    | King     | IT Staff |         6 |
+| Laura     | Callahan | IT Staff |         6 |
++-----------+----------+----------+-----------+
 
 
 
