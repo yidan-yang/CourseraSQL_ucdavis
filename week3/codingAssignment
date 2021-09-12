@@ -75,6 +75,7 @@ where a.AlbumId = 1
 
 
 /* #4 Retrieve a list with the managers last name, and the last name of the employees who report to him or her.*/
+/* After running the query described above, who are the reports for the manager named Mitchell (select all that apply)?*/
 -- First, check the job types among the employees table
 select Title
 from Employees
@@ -122,6 +123,27 @@ where ReportsTo = 6
 
 
 
+/* #5 Find the name and ID of the artists who do not have albums. */
+/* After running the query described above, two of the records returned have the same last name. Enter that name below.*/
+-- use left join
+select ar.ArtistId, ar.Name as ArtistName, al.AlbumId
+from Artists ar left join Albums al on ar.ArtistId = al.ArtistId
+where al.AlbumId is NULL
 
++----------+----------------------------+---------+
+| ArtistId | ArtistName                 | AlbumId |
++----------+----------------------------+---------+
+|       25 | Milton Nascimento & Bebeto |    None |
+|       26 | Azymuth                    |    None |
+|       28 | João Gilberto              |    None |
+|       29 | Bebel Gilberto             |    None |
+|       30 | Jorge Vercilo              |    None |
+|       31 | Baby Consuelo              |    None |
+|       32 | Ney Matogrosso             |    None |
+|       33 | Luiz Melodia               |    None |
+|       34 | Nando Reis                 |    None |
+|       35 | Pedro Luís & A Parede      |    None |
++----------+----------------------------+---------+
+(Output limit exceeded, 10 of 71 total rows shown)
 
 
