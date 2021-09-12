@@ -175,6 +175,21 @@ order by LastName DESC
 (Output limit exceeded, 10 of 67 total rows shown)
 
 
+/* #7 See if there are any customers who have a different city listed in their billing city versus their customer city.*/
+select c.CustomerId, c.City, i.BillingCity
+from Customers c
+inner join Invoices i on c.CustomerId = i.CustomerId
+where c.City != i.BillingCity
 
+-- For non-matching, we can use another syntax <>
+select c.CustomerId, c.City, i.BillingCity
+from Customers c
+inner join Invoices i on c.CustomerId = i.CustomerId
+where c.City <> i.BillingCity
 
++------------+------+-------------+
+| CustomerId | City | BillingCity |
++------------+------+-------------+
++------------+------+-------------+
+(Zero rows)
 
