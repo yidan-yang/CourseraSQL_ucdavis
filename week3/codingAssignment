@@ -1,0 +1,37 @@
+-- All of the questions in this quiz refer to the open source Chinook Database
+
+
+/* #1 Using a subquery, find the names of all the tracks for the album "Californication".*/
+select Name from Tracks where AlbumId is (
+select AlbumId from Albums where Title = 'Californication')
+
+
+/* #2 Find the total number of invoices for each customer along with the customer's full name, city and email. */
+select c.FirstName, c.LastName, c.City, c.Email, count(i.CustomerId) as numinv
+from Customers c inner join Invoices i on c.CustomerId = i.CustomerId
+group by c.CustomerId
+
+-- Note: This one has to use group by in the end, otherwise it only shows one client's name.
+
+
+/* #3 What is the song title of trackID 12 from the "For Those About to Rock We Salute You" album? Enter the answer below.*/ 
+-- first try, the problem description is 'For Those About to Rock We Salute You'
+-- But it's actually 'For Those About To Rock We Salute You' (case sensitive)
+-- Use wildcards
+select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
+from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
+where a.Title = 'For Those About To Rock We Salute You' and t.TrackId = 12
+
+
+-- Final soln
+select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
+from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
+where a.Title = 'For Those About To Rock We Salute You' and t.TrackId = 12
+
+
+
+-- Given the AlbumId of 'For Those About to Rock We Salute You' is 1, we can use
+select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
+from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
+where a.AlbumId = 1
+
