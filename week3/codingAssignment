@@ -147,3 +147,34 @@ where al.AlbumId is NULL
 (Output limit exceeded, 10 of 71 total rows shown)
 
 
+
+/* #6 Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order.*/
+/* After running the query described above, determine what is the last name of the 6th record?*/
+/* Enter it below. Remember to order things in descending order to be sure to get the correct answer.*/
+select FirstName, LastName 
+from Employees  
+union
+select FirstName, LastName
+from Customers
+order by LastName DESC
+
++-----------+--------------+
+| FirstName | LastName     |
++-----------+--------------+
+| Fynn      | Zimmermann   |
+| Stanisław | Wójcik       |
+| František | Wichterlová  |
+| Johannes  | Van der Berg |
+| François  | Tremblay     |
+| Mark      | Taylor       |
+| Ellie     | Sullivan     |
+| Victor    | Stevens      |
+| Puja      | Srivastava   |
+| Jack      | Smith        |
++-----------+--------------+
+(Output limit exceeded, 10 of 67 total rows shown)
+
+
+
+
+
