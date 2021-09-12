@@ -20,7 +20,7 @@ group by c.CustomerId
 -- Use wildcards
 select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
 from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
-where a.Title = 'For Those About To Rock We Salute You' and t.TrackId = 12
+where a.Title like 'For%' and t.TrackId = 12
 
 
 -- Final soln
