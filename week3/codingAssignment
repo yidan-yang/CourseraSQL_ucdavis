@@ -35,3 +35,44 @@ select t.Name as TrackName, t.AlbumId, a.ArtistId, t.TrackId,a.Title
 from Tracks t inner join Albums a on t.AlbumId = a.AlbumId
 where a.AlbumId = 1
 
+
+/* #4 Retrieve a list with the managers last name, and the last name of the employees who report to him or her.*/
+-- First, check the job types among the employees table
+select Title
+from Employees
+
++---------------------+
+| Title               |
++---------------------+
+| General Manager     |
+| Sales Manager       |
+| Sales Support Agent |
+| Sales Support Agent |
+| Sales Support Agent |
+| IT Manager          |
+| IT Staff            |
+| IT Staff            |
++---------------------+
+
+-- There are 3 managers: General Manager, IT Manager and Sales Manager
+
+-- Use wildcards to retrieve Managers' name
+select FirstName, LastName, Title, ReportsTo
+from Employees
+where Title like '%Manager'
+
++-----------+----------+-----------------+-----------+
+| FirstName | LastName | Title           | ReportsTo |
++-----------+----------+-----------------+-----------+
+| Andrew    | Adams    | General Manager |      None |
+| Nancy     | Edwards  | Sales Manager   |         1 |
+| Michael   | Mitchell | IT Manager      |         1 |
++-----------+----------+-----------------+-----------+
+
+
+
+
+
+
+
+
