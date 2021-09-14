@@ -52,7 +52,7 @@ from STATION
 where RIGHT(CITY,1) in ('a','e','i','o','u');
 
 -------------------------------------------------------------------------------------------
--- #4 Query the list of CITY names from STATION that do not end with vowels.
+-- #5 Query the list of CITY names from STATION that do not end with vowels.
 --    Your result cannot contain duplicates.
 -------------------------------------------------------------------------------------------
 select distinct(CITY)
@@ -63,3 +63,17 @@ where substr(CITY,-1,1) not in ('a','e','i','o','u');
 select distinct(CITY)
 from STATION
 where right(CITY,1) not in ('a','e','i','o','u');
+
+
+-------------------------------------------------------------------------------------------
+-- #6 Query the list of CITY names from STATION that do not end with vowels.
+--    Your result cannot contain duplicates.
+-------------------------------------------------------------------------------------------
+select distinct(CITY)
+from STATION
+where left(CITY,1) not in ('a','e','i','o','u') or right(CITY,1) not in ('a','e','i','o','u')
+
+-- Use REGEXP
+select distinct(CITY)
+from STATION
+where CITY not REGEXP '^[aeiou]' or CITY not REGEXP '[aeiou]$'
