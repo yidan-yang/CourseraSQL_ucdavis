@@ -57,3 +57,45 @@ from Customers
 where PostalCode is null
 
 
+-- #5: Find the cities with the most customers and rank in descending order.
+--     Which of the following cities indicate having 2 customers?
+
+select City, Count(CustomerId)
+from Customers 
+group by City
+order by count(CustomerId) desc
+
++---------------+-------------------+
+| City          | Count(CustomerId) |
++---------------+-------------------+
+| Berlin        |                 2 |
+| London        |                 2 |
+| Mountain View |                 2 |
+| Paris         |                 2 |
+| Prague        |                 2 |
+| São Paulo     |                 2 |
+| Amsterdam     |                 1 |
+| Bangalore     |                 1 |
+| Bordeaux      |                 1 |
+| Boston        |                 1 |
+| Brasília      |                 1 |
+| Brussels      |                 1 |
+| Budapest      |                 1 |
+| Buenos Aires  |                 1 |
+| Chicago       |                 1 |
+| Copenhagen    |                 1 |
+| Cupertino     |                 1 |
+| Delhi         |                 1 |
+| Dijon         |                 1 |
+| Dublin        |                 1 |
+| Edinburgh     |                 1 |
+| Edmonton      |                 1 |
+| Fort Worth    |                 1 |
+| Frankfurt     |                 1 |
+| Halifax       |                 1 |
++---------------+-------------------+
+(Output limit exceeded, 25 of 53 total rows shown)
+
+
+-- #6: 
+
