@@ -34,9 +34,9 @@
 --                                           |---------------|-----------------
 --                                           |CODE2          | VARCHAR2(2)    |
 --                                           |=================================
---
+-- Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
 --
 ---------------------------------------------------------------------------------
--- #1 Write a query that prints a list of employee names 
---    (i.e.: the name attribute) from the Employee table in alphabetical order.
+-- #1 Given the CITY and COUNTRY tables, query the names of all cities where 
+--    the CONTINENT is 'Africa'.
 -----------------------------------------------------------------------------------
