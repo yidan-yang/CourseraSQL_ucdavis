@@ -51,3 +51,15 @@ select distinct(CITY)
 from STATION
 where RIGHT(CITY,1) in ('a','e','i','o','u');
 
+-------------------------------------------------------------------------------------------
+-- #4 Query the list of CITY names from STATION that do not end with vowels.
+--    Your result cannot contain duplicates.
+-------------------------------------------------------------------------------------------
+select distinct(CITY)
+from STATION
+where substr(CITY,-1,1) not in ('a','e','i','o','u');
+
+-- Use right( ) function 
+select distinct(CITY)
+from STATION
+where right(CITY,1) not in ('a','e','i','o','u');
