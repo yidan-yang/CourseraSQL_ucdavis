@@ -15,3 +15,13 @@
 --     If two or more students both have names ending in the same last three characters 
 --     (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
 -----------------------------------------------------------------------------------
+select Name
+from STUDENTS
+where Marks > 75
+order by right(Name,3), ID asc
+
+-- Use SUBSTR
+select Name
+from STUDENTS
+where Marks > 75
+order by substr(Name,-3), ID asc
