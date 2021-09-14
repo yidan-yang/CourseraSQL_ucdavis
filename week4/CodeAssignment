@@ -49,4 +49,11 @@ order by LastName ASC
 +-----------+----------+----------+
 
 
+-- #4: Profiling the Customers table, answer the following question.
+--     Are there any columns with null values? Indicate any below. Select all that apply.
+
+select *
+from Customers
+where PostalCode is null
+
 
