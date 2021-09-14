@@ -97,5 +97,58 @@ order by count(CustomerId) desc
 (Output limit exceeded, 25 of 53 total rows shown)
 
 
--- #6: 
+-- #6: Create a new customer invoice id by combining a customer’s invoice id with their first and last name while ordering your query in the following order: firstname, lastname, and invoiceID.
+--     Select all of the correct "AstridGruber" entries that are returned in your results below. Select all that apply.
 
+select c.FirstName||c.LastName||i.InvoiceId as NewInvoiceId
+from Customers c, Invoices i
+where c.CustomerId = i.CustomerId
+order by c.FirstName asc
+
++-------------------+
+| NewInvoiceId      |
++-------------------+
+| AaronMitchell50   |
+| AaronMitchell61   |
+| AaronMitchell116  |
+| AaronMitchell245  |
+| AaronMitchell268  |
+| AaronMitchell290  |
+| AaronMitchell342  |
+| AlexandreRocha57  |
+| AlexandreRocha68  |
+| AlexandreRocha123 |
+| AlexandreRocha252 |
+| AlexandreRocha275 |
+| AlexandreRocha297 |
+| AlexandreRocha349 |
+| AstridGruber78    |
+| AstridGruber89    |
+| AstridGruber144   |
+| AstridGruber273   |
+| AstridGruber296   |
+| AstridGruber318   |
+| AstridGruber370   |
+| BjørnHansen2      |
+| BjørnHansen24     |
+| BjørnHansen76     |
+| BjørnHansen197    |
++-------------------+
+(Output limit exceeded, 25 of 412 total rows shown)
+
+-- Another way to solve #6 is:
+select c.FirstName||c.LastName as FullName, c.FirstName||c.LastName||i.InvoiceId as NewInvoiceId
+from Customers c, Invoices i
+where c.CustomerId = i.CustomerId and FullName is 'AstridGruber'
+
++--------------+-----------------+
+| FullName     | NewInvoiceId    |
++--------------+-----------------+
+| AstridGruber | AstridGruber78  |
+| AstridGruber | AstridGruber89  |
+| AstridGruber | AstridGruber144 |
+| AstridGruber | AstridGruber273 |
+| AstridGruber | AstridGruber296 |
+| AstridGruber | AstridGruber318 |
+| AstridGruber | AstridGruber370 |
++--------------+-----------------+
