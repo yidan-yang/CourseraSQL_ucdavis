@@ -1,1 +1,19 @@
 --  Week 4 Code Assignment Note
+--  Same ER diagram as week 3
+
+-- #1: Pull a list of customer ids with the customer’s full name, and address, along with combining their city and country together. 
+--     Be sure to make a space in between these two and make it UPPER CASE. (e.g. LOS ANGELES USA)
+
+
+select FirstName ||' '|| LastName as FullName, Address, UPPER(City||' '|| Country) as Location
+from Customers
+where CustomerID = 16
+
++--------------+---------------------------+-------------------+
+| FullName     | Address                   | Location          |
++--------------+---------------------------+-------------------+
+| Frank Harris | 1600 Amphitheatre Parkway | MOUNTAIN VIEW USA |
++--------------+---------------------------+-------------------+
+
+
+-- #2
