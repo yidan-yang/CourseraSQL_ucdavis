@@ -15,7 +15,7 @@ where CustomerID = 16
 +--------------+---------------------------+-------------------+
 
 
--- #2 Create a new employee user id by combining the first 4 letters of the employee’s first name with the first 2 letters of the employee’s last name. 
+-- #2: Create a new employee user id by combining the first 4 letters of the employee’s first name with the first 2 letters of the employee’s last name. 
 --    Make the new field lower case and pull each individual step to show your work.
 
 select lower(substr(FirstName,1,4) || substr(LastName,1,2)) as Username
@@ -27,4 +27,26 @@ where FirstName is 'Robert' and LastName is 'King'
 +----------+
 | robeki   |
 +----------+
+
+
+-- #3: Show a list of employees who have worked for the company for 15 or more years using the current date function. Sort by lastname ascending.
+
+select FirstName, LastName, DATE('now')-strftime('%Y', HireDate) as WorkYear
+from Employees
+order by LastName ASC
+
++-----------+----------+----------+
+| FirstName | LastName | WorkYear |
++-----------+----------+----------+
+| Andrew    | Adams    |       19 |
+| Laura     | Callahan |       17 |
+| Nancy     | Edwards  |       19 |
+| Steve     | Johnson  |       18 |
+| Robert    | King     |       17 |
+| Michael   | Mitchell |       18 |
+| Margaret  | Park     |       18 |
+| Jane      | Peacock  |       19 |
++-----------+----------+----------+
+
+
 
