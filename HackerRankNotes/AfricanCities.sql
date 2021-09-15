@@ -40,3 +40,19 @@
 -- #1 Given the CITY and COUNTRY tables, query the names of all cities where 
 --    the CONTINENT is 'Africa'.
 -----------------------------------------------------------------------------------
+select ci.NAME
+from CITY ci, COUNTRY co 
+where ci.COUNTRYCODE = co.CODE and co.CONTINENT='Africa'
+
+-- Use inner join
+select ci.NAME
+from CITY ci inner join COUNTRY co on ci.COUNTRYCODE = co.CODE
+where co.CONTINENT='Africa'
+
+
+---------------------------------------------------------------------------------
+-- #1 Given the CITY and COUNTRY tables, query the names  of all the continents
+--   (COUNTRY.Continent) and their respective average city populations (CITY.Population)
+--    rounded down to the nearest integer.
+-----------------------------------------------------------------------------------
+
