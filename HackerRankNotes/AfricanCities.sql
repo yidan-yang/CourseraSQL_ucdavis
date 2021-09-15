@@ -51,8 +51,19 @@ where co.CONTINENT='Africa'
 
 
 ---------------------------------------------------------------------------------
--- #1 Given the CITY and COUNTRY tables, query the names  of all the continents
+-- #2 Given the CITY and COUNTRY tables, query the names  of all the continents
 --   (COUNTRY.Continent) and their respective average city populations (CITY.Population)
 --    rounded down to the nearest integer.
 -----------------------------------------------------------------------------------
+select COUNTRY.CONTINENT, floor(avg(CITY.POPULATION)) 
+from COUNTRY, CITY
+where COUNTRY.CODE = CITY.COUNTRYCODE
+group by COUNTRY.CONTINENT
 
+-- Remark: function round(decimal, 0) doesn't work here
+
+-- Inner join works as well
+select COUNTRY.CONTINENT, floor(avg(CITY.POPULATION)) 
+from COUNTRY inner join CITY on
+COUNTRY.CODE = CITY.COUNTRYCODE
+group by COUNTRY.CONTINENT
