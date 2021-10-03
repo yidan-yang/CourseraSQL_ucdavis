@@ -125,3 +125,37 @@ from user
 order by fans desc
 limit 10
 
+
+-- Part 2: Inferences and Analysis
+
+-- 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. 
+--    Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. 
+--    Include your code.
+
+-- i. Do the two groups you chose to analyze have a different distribution of hours?
+-- choose city: Pittsburgh 
+select
+business.name
+, business.city
+, category.category
+, business.stars
+, hours.hours
+, business.review_count
+, business.postal_code
+from (business inner join category on business.id = category.business_id) inner join hours on hours.business_id = category.business_id
+where business.city = 'Pittsburgh' 
+group by business.stars;
+
+
+-- 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? 
+--    List at least two differences and the SQL code you used to arrive at your answer.
+select b.name, b.is_open, b.city, b.stars, b.review_count, count(h.hours) as open_days
+from business b inner join hours h on b.id = h.business_id
+where b.is_open = 1
+group by name
+
+select b.name, b.is_open, b.city, b.stars, b.review_count, count(h.hours) as open_days
+from business b inner join hours h on b.id = h.business_id
+where b.is_open = 0
+group by name
+	
