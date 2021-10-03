@@ -196,34 +196,111 @@ Copy and Paste the Resulting Table Below (2 columns – star rating and count):
 7. Find the top 3 users based on their total number of reviews:
 		
 	SQL code used to arrive at answer:
-	
+select name, review_count
+from user
+order by review_count desc
+limit 3
+
 		
 	Copy and Paste the Result Below:
-		
++--------+--------------+
+| name   | review_count |
++--------+--------------+
+| Gerald |         2000 |
+| Sara   |         1629 |
+| Yuri   |         1339 |
++--------+--------------+	
 
 
 8. Does posing more reviews correlate with more fans?
 
 	Please explain your findings and interpretation of the results:
+Yes, posing more reviews correlate with more fans
++------+--------------+---------------------+--------+--------+
+| fans | review_count | yelping_since       | useful |  funny |
++------+--------------+---------------------+--------+--------+
+|  503 |          609 | 2007-07-19 00:00:00 |   3226 |   2554 |
+|  497 |          968 | 2011-03-30 00:00:00 |    257 |    138 |
+|  311 |         1153 | 2012-11-27 00:00:00 | 122921 | 122419 |
+|  253 |         2000 | 2012-12-16 00:00:00 |  17524 |   2324 |
+|  173 |          930 | 2009-07-08 00:00:00 |   4834 |   6646 |
+|  159 |          813 | 2009-10-05 00:00:00 |     48 |     13 |
+|  133 |          377 | 2009-02-05 00:00:00 |   1062 |    672 |
+|  126 |         1215 | 2015-02-19 00:00:00 |   9363 |   9361 |
+|  124 |          862 | 2012-04-05 00:00:00 |   9851 |   7606 |
+|  120 |          834 | 2007-08-14 00:00:00 |    455 |    150 |
+|  115 |          861 | 2009-05-31 00:00:00 |   4008 |    570 |
+|  111 |          408 | 2008-10-28 00:00:00 |   1366 |    984 |
+|  105 |          255 | 2007-08-29 00:00:00 |    120 |    112 |
+|  104 |         1039 | 2006-03-28 00:00:00 |   2995 |   1188 |
+|  101 |          694 | 2010-10-01 00:00:00 |    158 |    164 |
+|  101 |         1246 | 2006-07-19 00:00:00 |   7850 |   5851 |
+|   96 |          307 | 2007-03-10 00:00:00 |   1180 |   1155 |
+|   89 |          584 | 2005-08-07 00:00:00 |   3177 |   2736 |
+|   85 |          842 | 2012-10-08 00:00:00 |    158 |     34 |
+|   84 |          220 | 2009-01-12 00:00:00 |   2161 |   2091 |
+|   81 |          408 | 2008-02-16 00:00:00 |    820 |    753 |
+|   80 |          178 | 2013-07-08 00:00:00 |   1091 |    774 |
+|   78 |          754 | 2009-09-07 00:00:00 |      9 |     18 |
+|   76 |         1339 | 2008-01-03 00:00:00 |   1166 |    220 |
+|   73 |          161 | 2009-04-30 00:00:00 |     13 |     10 |
++------+--------------+---------------------+--------+--------+
+(Output limit exceeded, 25 of 10000 total rows shown)
 	
 
 	
 9. Are there more reviews with the word "love" or with the word "hate" in them?
 
-	Answer:
+	Answer: Yes
 
 	
 	SQL code used to arrive at answer:
+select count(*) as lovenum
+from review
+where text like '%love%'
+
++---------+
+| lovenum |
++---------+
+|    1780 |
++---------+
+
+select count(*) as hatenum
+from review
+where text like '%hate%'
+
++---------+
+| hatenum |
++---------+
+|     232 |
++---------+
+
 
 	
 	
 10. Find the top 10 users with the most fans:
 
 	SQL code used to arrive at answer:
-	
+select id, name, fans
+from user
+order by fans desc
+limit 10	
 	
 	Copy and Paste the Result Below:
-
++------------------------+-----------+------+
+| id                     | name      | fans |
++------------------------+-----------+------+
+| -9I98YbNQnLdAmcYfb324Q | Amy       |  503 |
+| -8EnCioUmDygAbsYZmTeRQ | Mimi      |  497 |
+| --2vR0DIsmQ6WfcSzKWigw | Harald    |  311 |
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |  253 |
+| -0IiMAZI2SsQ7VmyzJjokQ | Christine |  173 |
+| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |  159 |
+| -9bbDysuiWeo2VShFJJtcw | Cat       |  133 |
+| -FZBTkAZEXoP7CYvRV2ZwQ | William   |  126 |
+| -9da1xk7zgnnfO1uTVYGkA | Fran      |  124 |
+| -lh59ko3dxChBSZ9U7LfUw | Lissa     |  120 |
++------------------------+-----------+------+
 	
 		
 
@@ -232,16 +309,34 @@ Part 2: Inferences and Analysis
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
 	
 i. Do the two groups you chose to analyze have a different distribution of hours?
-
+Yes
 
 ii. Do the two groups you chose to analyze have a different number of reviews?
-         
+Yes         
          
 iii. Are you able to infer anything from the location data provided between these two groups? Explain.
+There seems to be a correlation between the location of the business and their rating. The business that are probably located in the same neighbor have close rating. 
 
 SQL code used for analysis:
+select
+business.name
+, business.city
+, category.category
+, business.stars
+, hours.hours
+, business.review_count
+, business.postal_code
+from (business inner join category on business.id = category.business_id) inner join hours on hours.business_id = category.business_id
+where business.city = 'Pittsburgh' 
+ group by business.stars;
 
-		
++-----------------------+------------+----------+-------+----------------------+--------------+-------------+
+| name                  | city       | category | stars | hours                | review_count | postal_code |
++-----------------------+------------+----------+-------+----------------------+--------------+-------------+
+| Papa Da Vinci         | Pittsburgh | Pizza    |   2.5 | Saturday|11:00-3:00  |           28 | 15213       |
+| Mad Mex - South Hills | Pittsburgh | Mexican  |   3.0 | Saturday|11:00-0:00  |          103 | 15220       |
+| PRO BIKE+RUN          | Pittsburgh | Shopping |   5.0 | Saturday|10:00-18:00 |            8 | 15205       |
++-----------------------+------------+----------+-------+----------------------+--------------+-------------+		
 		
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
 		

@@ -97,3 +97,31 @@ group by stars
 
 
 -- 7. Find the top 3 users based on their total number of reviews:
+select name, review_count
+from user
+order by review_count desc
+limit 3
+
+
+-- 8. Does posing more reviews correlate with more fans?
+select fans, review_count, yelping_since, useful, funny
+from user
+order by fans desc
+
+
+-- 9. Are there more reviews with the word "love" or with the word "hate" in them?
+select count(*) as lovenum
+from review
+where text like '%love%'
+
+select count(*) as hatenum
+from review
+where text like '%hate%'
+
+
+-- 10. Find the top 10 users with the most fans:
+select id, name, fans
+from user
+order by fans desc
+limit 10
+
